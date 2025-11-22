@@ -39,15 +39,18 @@ variant_positions = DataFrame([
     {
         'id': 'rs' + document_summary.get('uid'),
         'chromosome': chromosome,
-        'position': position
+        'position': position,
+        'clinical significance': clinical_significance
     }
     for document_summary in result.data
     for chrom_and_position in document_summary.findall('.//ns0:CHRPOS', namespaces)
     for chromosome, position in [chrom_and_position.text.split(':')]
+    for clinical_significant_list in document_summary.findall('.//ns0:CLINICAL_SIGNIFICANCE', namespaces)
+    for clinical_significance in [clinical_significant_list.text]
 ])
 
 print(variant_positions)
-variants = parse_dbsnp_variants(result)
-print(variants.coordinates)
-print(variants.alt_frequencies.head(5)) # printing first five
+#variants = parse_dbsnp_variants(result)
+#print(variants.coordinates)
+#print(variants.alt_frequencies.head(5)) # printing first five
 
