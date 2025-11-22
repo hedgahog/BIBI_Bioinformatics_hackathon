@@ -1,5 +1,5 @@
 ./tools
-
+./.idea
 ### VisualStudioCode template
 .vscode/*
 !.vscode/settings.json
@@ -672,3 +672,13 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+/.idea/.gitignore
+/.idea/BIBI_Bioinformatics_hackathon.iml
+/.idea/copilot.data.migration.agent.xml
+/.idea/copilot.data.migration.ask.xml
+/.idea/copilot.data.migration.ask2agent.xml
+/.idea/copilot.data.migration.edit.xml
+/.idea/git_toolbox_prj.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/vcs.xml
