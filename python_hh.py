@@ -2,7 +2,6 @@ from easy_entrez import EntrezAPI
 from easy_entrez.parsing import xml_to_string, namespaces
 from easy_entrez.parsing import parse_dbsnp_variants
 from pandas import DataFrame
-from Biopython
 
 
 
