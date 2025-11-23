@@ -36,6 +36,6 @@ resp = client.models.generate_content(
 )
 
 print(resp.text)
-
+# to do: turn into a function so I can call it?
 
 
