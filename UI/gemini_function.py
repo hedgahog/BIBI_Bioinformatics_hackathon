@@ -17,7 +17,7 @@ def get_html(rs):
 def json_to_dict(rs):
     #rs_num = rs[2:] if rs.lower().startswith("rs") else rs
     # request json data
-    return requests.get(f"https://api.ncbi.nlm.nih.gov/variation/v0/refsnp/{rs}", timeout=30).json() # return python dictionary
+    return requests.get(f"https://api.ncbi.nlm.nih.gov/variation/v0/refsnp/{rs}", timeout=30).json() # return apis dictionary
     #return json.dumps(python_dic, ensure_ascii=True)
 
 
@@ -26,17 +26,17 @@ def json_to_dict(rs):
 def SNP_to_genai(python_dic,html):
     client = genai.Client(api_key="AIzaSyDPLdzA2Isg4v-6Ua10fhO9-mGiTRCxsWk")
     system_rules = (
-      "Use ONLY the provided python dictionary and html text below. "
+      "Use ONLY the provided apis dictionary and html text below. "
       "You can combine both texts to provide a comprehensive summary"
       "If a fact isn't present, reply 'Not in data'. "
-      "Do NOT return compact python dictionary and html. Return an easy to read summary for novices"
+      "Do NOT return compact apis dictionary and html. Return an easy to read summary for novices"
     )
 
     prompt = (
-      "Summarize this SNP from the python dictionary: rs, gene name, chromosome, GRCh38 position, "
+      "Summarize this SNP from the apis dictionary: rs, gene name, chromosome, GRCh38 position, "
       "alleles, clinical significance, and Diseases."
       "Format it in an pretty way for a novice to read"
-      "Tell user which data type(html versus python dict) each piece of information is from"
+      "Tell user which data type(html versus apis dict) each piece of information is from"
     )
 
 
