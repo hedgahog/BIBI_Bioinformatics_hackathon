@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
-from api.gemini_function import get_summary
+
+from gemini_function import get_summary
 
 # SNP: Single Nucleotide Polymorphism
 # create title
