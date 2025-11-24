@@ -36,6 +36,7 @@ def SNP_to_genai(ncbi_result: dict, ensembl_result: str, entrez_result: str):
         "Format it in an pretty and easy way to read"
         "At the end of the summary, include one line stating the data sources used "
         "(e.g., 'Data sources: NCBI, Ensembl, ClinVar')."
+        "If there is list of citations, do deeper research on those researches and include any important findings in the summary, with source"
     )
 
     resp = client.models.generate_content(
