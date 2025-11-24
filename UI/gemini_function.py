@@ -15,7 +15,7 @@ def json_to_dict(rs):
 
 
 def SNP_to_genai(python_dic):
-    client = genai.Client(api_key="AIzaSyCsjSHz0nMJmHuY45k5jizjpb1-0BwJv48")
+    client = genai.Client(api_key="")
     system_rules = (
       "Use ONLY the provided python dictionary text below. "
       "If a fact isn't present, reply 'Not in data'. "
@@ -48,6 +48,7 @@ def SNP_to_genai(python_dic):
 rs = "6311" # user input
 if __name__ == "__main__":
     print(SNP_to_genai(json_to_dict(rs)))
+
 
 
 
