@@ -1,27 +1,31 @@
 import streamlit as st
-import requests
 
 from gemini_function import get_summary
 
-# SNP: Single Nucleotide Polymorphism
-# create title
-st.title("SNP summary")
 
-# create rs id input
+def run_streamlit():
+    # SNP: Single Nucleotide Polymorphism
+    # create title
+    st.title("SNP summary")
 
-rs_input = st.text_input("SNP rs id", "Enter rs number")
+    st.text(body="Get a summary of a SNP given its rs id")
 
-output = None  # initialize summary to 'None'
+    # create rs id input
 
-# display summary
-if rs_input.isalpha():
-    output = "Put in numbers only"
-else:
-    output = get_summary(rs_input)
+    rs_input = st.text_input(label="Enter rs number", placeholder="6311")
 
-# create submit button
-if st.button("Enter", type="primary"):
-    if output:
-        st.markdown(output, unsafe_allow_html=True)  # create markdown for summary
+    output = None  # initialize summary to 'None'
+
+    # display summary
+    if rs_input.isalpha():
+        output = "Put in numbers only"
     else:
-        st.error("Invalid input: Does your id exist?")
+        with st.spinner('Fetching SNP summary... Gemini is processing a response...'):
+            output = get_summary(rs_input)
+
+    # create submit button
+    if st.button("Enter", type="primary"):
+        if output:
+            st.markdown(output, unsafe_allow_html=True)  # create markdown for summary
+        else:
+            st.error("Invalid input: Does your id exist?")
