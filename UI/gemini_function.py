@@ -4,7 +4,7 @@ import os
 
 from google import genai
 
-api_key = os.environ["GOOGLE_API_KEY"]
+api_key = os.environ["GEMINI_API_KEY"]
 
 
 def get_summary(rs_input):

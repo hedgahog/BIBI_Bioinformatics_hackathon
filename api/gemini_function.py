@@ -4,8 +4,7 @@ import os
 
 from google import genai
 
-api_key = os.environ["GOOGLE_API_KEY"]
-
+api_key = os.environ["GEMINI_API_KEY"]
 
 def get_summary(rs_input):
     return SNP_to_genai(json_to_dict(rs_input), get_html(rs_input))
