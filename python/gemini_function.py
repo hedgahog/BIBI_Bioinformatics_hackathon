@@ -6,8 +6,8 @@ from google import genai
 from ncbi_api import request_ncbi_rs
 from get_ensembl import get_html
 
-api_key = os.environ["GEMINI_API_KEY"]
-
+#api_key = os.environ["GEMINI_API_KEY"]
+api_key = "AIzaSyC-eroOTKhDauoMx76fATY3WaZlaCyBcic"
 
 def get_summary(rs_input) -> str:
     try:
