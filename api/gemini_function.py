@@ -58,4 +58,5 @@ def SNP_to_genai(python_dic, html):
 rs = "2068824"  # user input
 '''if __name__ == "__main__":
     print(SNP_to_genai(json_to_dict(rs)))'''
-print(SNP_to_genai(json_to_dict(rs), get_html(rs)))
+# Commented out because it was called everytime
+#print(SNP_to_genai(json_to_dict(rs), get_html(rs)))
