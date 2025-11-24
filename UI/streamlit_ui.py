@@ -1,10 +1,6 @@
-# TODO: I put gemini_function.py into UI folder because I can't figure out how to call it from a different folder
-from json import JSONDecodeError
-import requests
-
 import streamlit as st
 import requests
-from gemini_function import get_summary
+from api.gemini_function import get_summary
 
 # SNP: Single Nucleotide Polymorphism
 # create title
