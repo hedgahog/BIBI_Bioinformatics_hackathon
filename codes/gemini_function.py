@@ -20,17 +20,16 @@ def get_summary(rs_input) -> str:
 def SNP_to_genai(python_dic, html):
     client = genai.Client(api_key=api_key)
     system_rules = (
-        "Use ONLY the provided apis dictionary and html text below. "
-        "You can combine both texts to provide a comprehensive summary"
+        "Use the provided apis dictionary and html text below first. "
+        "You can combine the texts to provide a comprehensive summary"
         "If a fact isn't present, reply 'Not in data'. "
-        "Do NOT return compact apis dictionary and html. Return an easy to read summary for "
+        "Do NOT return compact apis dictionary and html. Return an easy to read summary for bioinformaticians and scientists. "
     )
 
     prompt = (
         "Summarize this SNP from the apis dictionary: rs, gene name, chromosome, GRCh38 position, "
         "alleles, clinical significance, and Diseases."
-        "Format it in an pretty way for a novice to read"
-        "Tell user which data type(html versus apis dict) each piece of information is from"
+        "Format it in an pretty and easy way to read"
     )
 
     resp = client.models.generate_content(
