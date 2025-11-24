@@ -1,18 +1,19 @@
 # pip install requests google-genai
 import json, requests
 import os
-
 from google import genai
+from get_ensembl import get_html
 
 api_key = os.environ["GEMINI_API_KEY"]
 
 
-def get_summary(rs_input)-> str:
+def get_summary(rs_input) -> str:
     try:
         result = SNP_to_genai(json_to_dict(rs_input), get_html(rs_input))
     except requests.exceptions.JSONDecodeError as e:
-        result =  f"Requests JSONDecodeError: {e}"
+        result = f"Requests JSONDecodeError: {e}"
     return result
+
 
 def json_to_dict(rs):
     # rs_num = rs[2:] if rs.lower().startswith("rs") else rs
