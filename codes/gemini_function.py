@@ -5,6 +5,7 @@ from google import genai
 
 from ncbi_api import get_info_from_ncbi
 from get_ensembl import get_info_from_ensembl
+from entrez import get_entrez_result
 
 api_key = os.environ["GEMINI_API_KEY"]
 
@@ -13,7 +14,7 @@ def get_summary(rs_input) -> str:
     try:
         ncbi_result = get_info_from_ncbi(rs_input)
         ensembl_result = get_info_from_ensembl(rs_input)
-        entrez_result = get_info_from_ensembl(rs_input)
+        entrez_result = get_entrez_result(rs_input)
         result = SNP_to_genai(ncbi_result, ensembl_result, entrez_result)
     except Exception as e:
         result = f"{e}\n\n **Please check the rs number and try again.**"
