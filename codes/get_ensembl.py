@@ -1,6 +1,6 @@
 import requests
 
-# TODO: interface has phenotype by html doesn't
+
 
 rs = "6311"  # user input
 
