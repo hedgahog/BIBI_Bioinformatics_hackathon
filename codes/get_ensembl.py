@@ -11,10 +11,6 @@ def get_info_from_ensembl(rs):
     r.raise_for_status()
     return r.text
 
-def get_phenotype(rs):
-    r = requests.get(f"https://useast.ensembl.org/Homo_sapiens/Variation/Phenotype?v=rs{rs}", timeout=30)
-    return r.text
-
 def get_rs():
     r = requests.get("https://rest.ensembl.org/variation/homo_sapiens/rs6311?content-type=application/json",
                  headers={"Content-Type": "application/json"})
