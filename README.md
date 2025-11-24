@@ -23,7 +23,7 @@ Or install genai as a package in your python editor.
 
 Obtain Gemini API key: https://ai.google.dev/gemini-api/docs/api-key
 
-Run the interface code:
+Run the interface code in your terminal:
 streamlit run streamlit_ui.py
 
 
