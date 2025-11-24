@@ -11,12 +11,7 @@ st.title("SNP summary")
 rs_input = st.text_input("SNP rs id", "Enter rs number")
 
 # display summary
-try:
-    summary = get_summary(rs_input)
-except requests.exceptions.JSONDecodeError:
-    st.error("Requests JSONDecodeError")
-except Exception as e:
-    st.error(f"An exception occurred: {e}")
+summary = get_summary(rs_input)
 
 # create submit button
 if st.button("Submit", type="primary"):

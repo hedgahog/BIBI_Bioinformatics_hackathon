@@ -7,8 +7,12 @@ from google import genai
 api_key = os.environ["GEMINI_API_KEY"]
 
 
-def get_summary(rs_input):
-    return SNP_to_genai(json_to_dict(rs_input), get_html(rs_input))
+def get_summary(rs_input)-> str:
+    try:
+        result = SNP_to_genai(json_to_dict(rs_input), get_html(rs_input))
+    except requests.exceptions.JSONDecodeError as e:
+        result =  f"Requests JSONDecodeError: {e}"
+    return result
 
 
 def get_html(rs):
@@ -66,3 +70,12 @@ rs = "2068824"  # user input
     print(SNP_to_genai(json_to_dict(rs)))'''
 # Commented out because it was called everytime
 # print(SNP_to_genai(json_to_dict(rs), get_html(rs)))
+
+if __name__ == "__main__":
+    try:
+        summary = get_summary(rs)
+    except Exception as e:
+        print(e)
+    print("Running Gemini_function.py")
+    print(summary[:200])
+    print(f"TYPE: {type(summary)}")
