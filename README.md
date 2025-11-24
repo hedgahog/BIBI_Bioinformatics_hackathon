@@ -10,7 +10,6 @@ python (3.9-3.13 supports streamlit)
 Gemini API
 
 Installation:
-
 Install streamlit in conda:
 conda install streamlit
 
