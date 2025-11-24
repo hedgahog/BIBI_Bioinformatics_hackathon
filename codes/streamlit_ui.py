@@ -21,8 +21,24 @@ else:
     with st.spinner('Fetching SNP summary... Gemini is processing a response...'):
         output = get_summary(rs_input)
 
+
+def hyperlinks():
+    st.markdown("Shortcut links to external databases:", unsafe_allow_html=True)
+    col1, col2, col3 = st.columns(spec = 3)
+
+    with col1:
+        st.link_button("NCBI", url=f"https://www.ncbi.nlm.nih.gov/snp/?term=rs{rs_input}", icon="🔗", use_container_width=True)
+    with col2:
+        st.link_button("Ensembl",
+                       url=f"{rs_input}",
+                       icon="🧬",use_container_width=True)
+    with col3:
+        st.link_button("ClinVar", url=f"", icon="🧫",use_container_width=True)
+
+
 # create submit button
 if st.button("Enter", type="primary"):
+    hyperlinks()
     if output:
         st.markdown(output, unsafe_allow_html=True)  # create markdown for summary
     else:
