@@ -14,14 +14,7 @@ rs_input = st.text_input(label="Enter rs number", placeholder="6311")
 
 output = None  # initialize summary to 'None'
 
-# display summary
-if rs_input.isalpha():
-    output = "Put in numbers only"
-elif rs_input == "":
-    output = "Input cannot be empty"
-else:
-    with st.spinner('Fetching SNP summary... Gemini is processing a response...'):
-        output = get_summary(rs_input)
+
 
 
 def hyperlinks():
@@ -39,10 +32,20 @@ def hyperlinks():
         st.link_button("ClinVar", url=f"https://www.ncbi.nlm.nih.gov/clinvar/?term={rs_input}", icon="🧫",
                        use_container_width=True)
 
-
+hyperlinks()
 # create submit button
 if st.button("Enter", type="primary"):
-    hyperlinks()
+    # display summary
+    if not rs_input:
+        output = "Input cannot be blank"
+    if rs_input.isalpha():
+        output = "Put in numbers only"
+    elif rs_input == "":
+        output = "Input cannot be empty"
+    else:
+        with st.spinner('Fetching SNP summary... Gemini is processing a response...'):
+            output = get_summary(rs_input)
+
     if output:
         st.markdown(output, unsafe_allow_html=True)  # create markdown for summary
     else:
