@@ -2,6 +2,15 @@
 import json, requests
 from google import genai
 
+def get_html(rs):
+    #rs_num = rs[2:] if rs.lower().startswith("rs") else rs
+    # request json data
+    r = requests.get(f"https://useast.ensembl.org/Homo_sapiens/Variation/Phenotype?v=rs{rs}", timeout=30)
+    params = {"phenotypes": 1}  # include disease/phenotype data
+    headers = {"Content-Type": "application/json", "Accept": "application/json"}
+    #r = requests.get(url, params=params, headers=headers, timeout=30)
+    r.raise_for_status()
+    return r.text
 
 
 
@@ -14,18 +23,20 @@ def json_to_dict(rs):
 
 
 
-def SNP_to_genai(python_dic):
+def SNP_to_genai(python_dic,html):
     client = genai.Client(api_key="")
     system_rules = (
-      "Use ONLY the provided python dictionary text below. "
+      "Use ONLY the provided python dictionary and html text below. "
+      "You can combine both texts to provide a comprehensive summary"
       "If a fact isn't present, reply 'Not in data'. "
-      "Do NOT return compact python dictionary. Return an easy to read summary for novices"
+      "Do NOT return compact python dictionary and html. Return an easy to read summary for novices"
     )
 
     prompt = (
       "Summarize this SNP from the python dictionary: rs, gene name, chromosome, GRCh38 position, "
       "alleles, clinical significance, and Diseases."
       "Format it in an pretty way for a novice to read"
+      "Tell user which data type(html versus python dict) each piece of information is from"
     )
 
 
@@ -37,18 +48,18 @@ def SNP_to_genai(python_dic):
             "role": "user",
             "parts": [
                 {"text": prompt},
-                {"text": str(python_dic)}
+                {"text": str(python_dic) + str(html)},
             ],
         }],
     )
 
     return(resp.text)
-    # to do: turn into a functionso I can call it?
 
-rs = "6311" # user input
-if __name__ == "__main__":
-    print(SNP_to_genai(json_to_dict(rs)))
 
+rs = "2068824" # user input
+'''if __name__ == "__main__":
+    print(SNP_to_genai(json_to_dict(rs)))'''
+print(SNP_to_genai(json_to_dict(rs),get_html(rs)))
 
 
 
