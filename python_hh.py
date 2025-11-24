@@ -40,13 +40,16 @@ variant_positions = DataFrame([
         'id': 'rs' + document_summary.get('uid'),
         'chromosome': chromosome,
         'position': position,
-        'clinical significance': clinical_significance
+        'clinical significance': clinical_significance,
+        #'disease names': disease_name
     }
     for document_summary in result.data
     for chrom_and_position in document_summary.findall('.//ns0:CHRPOS', namespaces)
     for chromosome, position in [chrom_and_position.text.split(':')]
     for clinical_significant_list in document_summary.findall('.//ns0:CLINICAL_SIGNIFICANCE', namespaces)
     for clinical_significance in [clinical_significant_list.text]
+    #for disease_name_list in document_summary.findall('.//ns0:DISEASE_NAME', namespaces)
+    #for disease_name in [disease_name_list.txt]
 ])
 
 print(variant_positions)

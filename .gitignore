@@ -1,5 +1,6 @@
 ./tools
 ./.idea
+tools/key.txt
 ### VisualStudioCode template
 .vscode/*
 !.vscode/settings.json
