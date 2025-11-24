@@ -3,31 +3,34 @@ import requests
 import os
 from google import genai
 
-from ncbi_api import request_ncbi_rs
-from get_ensembl import get_html
+from ncbi_api import get_info_from_ncbi
+from get_ensembl import get_info_from_ensembl
 
 api_key = os.environ["GEMINI_API_KEY"]
 
 
 def get_summary(rs_input) -> str:
     try:
-        result = SNP_to_genai(request_ncbi_rs(rs_input), get_html(rs_input))
+        ncbi_result = get_info_from_ncbi(rs_input)
+        ensembl_result = get_info_from_ensembl(rs_input)
+        entrez_result = get_info_from_ensembl(rs_input)
+        result = SNP_to_genai(ncbi_result, ensembl_result, entrez_result)
     except requests.exceptions.JSONDecodeError as e:
         result = f"Requests JSONDecodeError: {e}"
     return result
 
 
-def SNP_to_genai(python_dic, html):
+def SNP_to_genai(ncbi_result:dict, ensembl_result:str, entrez_result:str):
     client = genai.Client(api_key=api_key)
     system_rules = (
-        "Use the provided apis dictionary and html text below first. "
+        "Use the provided dictionary and html text below first. "
         "You can combine the texts to provide a comprehensive summary"
         "If a fact isn't present, reply 'Not in data'. "
         "Do NOT return compact apis dictionary and html. Return an easy to read summary for bioinformaticians and scientists. "
     )
 
     prompt = (
-        "Summarize this SNP from the apis dictionary: rs, gene name, chromosome, GRCh38 position, "
+        "Summarize this SNP from the dictionary: rs, gene name, chromosome, GRCh38 position, "
         "alleles, clinical significance, and Diseases."
         "Format it in an pretty and easy way to read"
     )
@@ -39,7 +42,7 @@ def SNP_to_genai(python_dic, html):
             "role": "user",
             "parts": [
                 {"text": prompt},
-                {"text": str(python_dic) + str(html)},
+                {"text": str(ncbi_result) + str(ensembl_result) + str(entrez_result)},
             ],
         }],
     )
