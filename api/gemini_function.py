@@ -25,7 +25,7 @@ def json_to_dict(rs):
 
 
 def SNP_to_genai(python_dic, html):
-    client = genai.Client(api_key="AIzaSyDPLdzA2Isg4v-6Ua10fhO9-mGiTRCxsWk")
+    client = genai.Client(api_key="")
     system_rules = (
         "Use ONLY the provided apis dictionary and html text below. "
         "You can combine both texts to provide a comprehensive summary"
