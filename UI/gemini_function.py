@@ -1,9 +1,15 @@
 # pip install requests google-genai
 import json, requests
+import os
+
 from google import genai
+
+api_key = os.environ["GOOGLE_API_KEY"]
+
 
 def get_summary(rs_input):
     return SNP_to_genai(json_to_dict(rs_input), get_html(rs_input))
+
 
 def get_html(rs):
     # rs_num = rs[2:] if rs.lower().startswith("rs") else rs
@@ -25,7 +31,7 @@ def json_to_dict(rs):
 
 
 def SNP_to_genai(python_dic, html):
-    client = genai.Client(api_key="AIzaSyDPLdzA2Isg4v-6Ua10fhO9-mGiTRCxsWk")
+    client = genai.Client(api_key=api_key)
     system_rules = (
         "Use ONLY the provided apis dictionary and html text below. "
         "You can combine both texts to provide a comprehensive summary"
@@ -59,4 +65,4 @@ rs = "2068824"  # user input
 '''if __name__ == "__main__":
     print(SNP_to_genai(json_to_dict(rs)))'''
 # Commented out because it was called everytime
-#print(SNP_to_genai(json_to_dict(rs), get_html(rs)))
+# print(SNP_to_genai(json_to_dict(rs), get_html(rs)))
