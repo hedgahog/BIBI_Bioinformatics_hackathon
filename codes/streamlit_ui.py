@@ -17,6 +17,8 @@ output = None  # initialize summary to 'None'
 # display summary
 if rs_input.isalpha():
     output = "Put in numbers only"
+elif rs_input == "":
+    output = "Input cannot be empty"
 else:
     with st.spinner('Fetching SNP summary... Gemini is processing a response...'):
         output = get_summary(rs_input)

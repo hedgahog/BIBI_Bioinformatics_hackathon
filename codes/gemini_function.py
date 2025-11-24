@@ -15,8 +15,8 @@ def get_summary(rs_input) -> str:
         ensembl_result = get_info_from_ensembl(rs_input)
         entrez_result = get_info_from_ensembl(rs_input)
         result = SNP_to_genai(ncbi_result, ensembl_result, entrez_result)
-    except requests.exceptions.JSONDecodeError as e:
-        result = f"Requests JSONDecodeError: {e}"
+    except Exception as e:
+        result = f"{e}\n\n **Please check the rs number and try again.**"
     return result
 
 
