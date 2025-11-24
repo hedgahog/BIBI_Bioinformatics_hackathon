@@ -16,7 +16,7 @@ rs_input = st.text_input("SNP rs id","Enter rs number")
 # create summary
 
 try:
-    summary = SNP_to_genai(json_to_dict(rs_input))
+    summary = SNP_to_genai(json_to_dict(rs_input),get_html(rs_input))
 except requests.exceptions.JSONDecodeError:
     st.error("Requests JSONDecodeError")
 
