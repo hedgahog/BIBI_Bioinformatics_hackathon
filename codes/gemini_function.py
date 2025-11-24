@@ -20,7 +20,7 @@ def get_summary(rs_input) -> str:
     return result
 
 
-def SNP_to_genai(ncbi_result:dict, ensembl_result:str, entrez_result:str):
+def SNP_to_genai(ncbi_result: dict, ensembl_result: str, entrez_result: str):
     client = genai.Client(api_key=api_key)
     system_rules = (
         "Use the provided dictionary and html text below first. "
@@ -33,6 +33,8 @@ def SNP_to_genai(ncbi_result:dict, ensembl_result:str, entrez_result:str):
         "Summarize this SNP from the dictionary: rs, gene name, chromosome, GRCh38 position, "
         "alleles, clinical significance, and Diseases."
         "Format it in an pretty and easy way to read"
+        "At the end of the summary, include one line stating the data sources used "
+        "(e.g., 'Data sources: NCBI, Ensembl, ClinVar')."
     )
 
     resp = client.models.generate_content(
@@ -46,7 +48,6 @@ def SNP_to_genai(ncbi_result:dict, ensembl_result:str, entrez_result:str):
             ],
         }],
     )
-
     return (resp.text)
 
 
