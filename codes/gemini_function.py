@@ -7,7 +7,7 @@ from ncbi_api import get_info_from_ncbi
 from get_ensembl import get_info_from_ensembl
 from entrez import get_entrez_result
 
-api_key = os.environ["GEMINI_API_KEY"]
+api_key = os.getenv("GEMINI_API_KEY")
 
 
 def get_summary(rs_input) -> str:
@@ -62,3 +62,4 @@ if __name__ == "__main__":
     print("Running Gemini_function.py")
     print(summary[:200])
     print(f"TYPE: {type(summary)}")
+
