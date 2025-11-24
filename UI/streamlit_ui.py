@@ -2,7 +2,7 @@
 from json import JSONDecodeError
 import requests
 
-import streamlit_ui as st
+import streamlit as st
 import requests
 from gemini_function import get_html, json_to_dict, SNP_to_genai
 # SNP: Single Nucleotide Polymorphism
