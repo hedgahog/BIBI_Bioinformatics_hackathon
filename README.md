@@ -1,8 +1,17 @@
 # BIBI_Bioinformatics_hackathon
-Prompt:
+Overview:
+We built a simple streamlit interface that will accept any rs id. Our Gemini AI agent uses data from NCBI and Ensembl to generate an insightful summary. This summary is catered towards bioinformaticians and scientists.
 
-Given a gene symbol or SNP ID, your AI agent should autonomously collect relevant information from at least one public bioinformatics source and generate a concise, structured “insight summary” (e.g., functional role, disease association, or known variants) that could assist a researcher or clinician. A minimal user interface is required for the demo.
 
-Prerequisites:
-esearch (24.7)
+Requirements:
+streamlit
+python (3.9-3.13 supports streamlit)
+
+Installation:
+Install streamlit in conda:
+conda install streamlit
+
+Run the interface code:
+streamlit run streamlit_ui.py
+
 

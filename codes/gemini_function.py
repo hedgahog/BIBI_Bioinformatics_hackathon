@@ -3,7 +3,7 @@ import requests
 import os
 from google import genai
 
-from codes.ncbi_api import request_ncbi_rs
+from ncbi_api import request_ncbi_rs
 from get_ensembl import get_html
 
 api_key = os.environ["GEMINI_API_KEY"]
@@ -23,7 +23,7 @@ def SNP_to_genai(python_dic, html):
         "Use ONLY the provided apis dictionary and html text below. "
         "You can combine both texts to provide a comprehensive summary"
         "If a fact isn't present, reply 'Not in data'. "
-        "Do NOT return compact apis dictionary and html. Return an easy to read summary for novices"
+        "Do NOT return compact apis dictionary and html. Return an easy to read summary for "
     )
 
     prompt = (
