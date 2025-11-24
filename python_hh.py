@@ -3,8 +3,6 @@ from easy_entrez.parsing import xml_to_string, namespaces
 from easy_entrez.parsing import parse_dbsnp_variants
 from pandas import DataFrame
 
-
-
 entrez_api = EntrezAPI(
     'your-tool-name',
     'e@mail.com',
@@ -20,7 +18,7 @@ var = result.data
 # fetching SNP
 rs6311 = entrez_api.fetch(['rs6311'], max_results=1, database='snp').data[0]'''
 
-#display result
+# display result
 
 
 # print(xml_to_string(rs6311))
@@ -41,19 +39,18 @@ variant_positions = DataFrame([
         'chromosome': chromosome,
         'position': position,
         'clinical significance': clinical_significance,
-        #'disease names': disease_name
+        # 'disease names': disease_name
     }
     for document_summary in result.data
     for chrom_and_position in document_summary.findall('.//ns0:CHRPOS', namespaces)
     for chromosome, position in [chrom_and_position.text.split(':')]
     for clinical_significant_list in document_summary.findall('.//ns0:CLINICAL_SIGNIFICANCE', namespaces)
     for clinical_significance in [clinical_significant_list.text]
-    #for disease_name_list in document_summary.findall('.//ns0:DISEASE_NAME', namespaces)
-    #for disease_name in [disease_name_list.txt]
+    # for disease_name_list in document_summary.findall('.//ns0:DISEASE_NAME', namespaces)
+    # for disease_name in [disease_name_list.txt]
 ])
 
 print(variant_positions)
-#variants = parse_dbsnp_variants(result)
-#print(variants.coordinates)
-#print(variants.alt_frequencies.head(5)) # printing first five
-
+# variants = parse_dbsnp_variants(result)
+# print(variants.coordinates)
+# print(variants.alt_frequencies.head(5)) # printing first five
