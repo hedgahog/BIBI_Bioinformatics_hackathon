@@ -4,7 +4,7 @@ import requests
 
 import streamlit as st
 import requests
-from gemini_function import json_to_dict, SNP_to_genai
+from gemini_function import get_html, json_to_dict, SNP_to_genai
 # SNP: Single Nucleotide Polymorphism
 # create title
 
