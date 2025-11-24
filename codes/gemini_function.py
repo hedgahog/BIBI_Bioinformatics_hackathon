@@ -1,7 +1,9 @@
 # pip install requests google-genai
-import json, requests
+import requests
 import os
 from google import genai
+
+from codes.ncbi_api import request_ncbi_rs
 from get_ensembl import get_html
 
 api_key = os.environ["GEMINI_API_KEY"]
@@ -9,18 +11,10 @@ api_key = os.environ["GEMINI_API_KEY"]
 
 def get_summary(rs_input) -> str:
     try:
-        result = SNP_to_genai(json_to_dict(rs_input), get_html(rs_input))
+        result = SNP_to_genai(request_ncbi_rs(rs_input), get_html(rs_input))
     except requests.exceptions.JSONDecodeError as e:
         result = f"Requests JSONDecodeError: {e}"
     return result
-
-
-def json_to_dict(rs):
-    # rs_num = rs[2:] if rs.lower().startswith("rs") else rs
-    # request json data
-    return requests.get(f"https://api.ncbi.nlm.nih.gov/variation/v0/refsnp/{rs}",
-                        timeout=30).json()  # return apis dictionary
-    # return json.dumps(python_dic, ensure_ascii=True)
 
 
 def SNP_to_genai(python_dic, html):
@@ -54,13 +48,8 @@ def SNP_to_genai(python_dic, html):
     return (resp.text)
 
 
-rs = "2068824"  # user input
-'''if __name__ == "__main__":
-    print(SNP_to_genai(json_to_dict(rs)))'''
-# Commented out because it was called everytime
-# print(SNP_to_genai(json_to_dict(rs), get_html(rs)))
-
 if __name__ == "__main__":
+    rs = "2068824"  # user input
     try:
         summary = get_summary(rs)
     except Exception as e:
