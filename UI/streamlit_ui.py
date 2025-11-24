@@ -4,7 +4,7 @@ import requests
 
 import streamlit as st
 import requests
-from gemini_function import get_html, json_to_dict, SNP_to_genai
+from gemini_function import get_summary
 
 # SNP: Single Nucleotide Polymorphism
 # create title
@@ -17,7 +17,8 @@ rs_input = st.text_input("SNP rs id", "Enter rs number")
 # create summary
 
 try:
-    summary = SNP_to_genai(json_to_dict(rs_input), get_html(rs_input))
+
+    summary = get_summary(rs_input)
 except requests.exceptions.JSONDecodeError:
     st.error("Requests JSONDecodeError")
 

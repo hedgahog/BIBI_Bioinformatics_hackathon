@@ -2,6 +2,8 @@
 import json, requests
 from google import genai
 
+def get_summary(rs_input):
+    return SNP_to_genai(json_to_dict(rs_input), get_html(rs_input))
 
 def get_html(rs):
     # rs_num = rs[2:] if rs.lower().startswith("rs") else rs
